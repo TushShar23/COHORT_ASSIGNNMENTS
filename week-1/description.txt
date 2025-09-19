@@ -1,4 +1,4 @@
-First week project 
+First week Assignments
 - vs code landing page
 - zerodha landing page
 
