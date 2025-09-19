@@ -1,1 +1,7 @@
-First week project - vs code landing page
+First week project 
+- vs code landing page
+- zerodha landing page
+
+https://zerodha-clone2.netlify.app/
+
+https://vs-code-landingpage.netlify.app/
