@@ -23,7 +23,7 @@ const operation = new Promise((resolve,reject)=>{
             else if(str[i]===" "){
                 let code = str.charCodeAt(i-1);// we need to use this function so that it gives the character code not the character.This is not c++.str[i] gives you the character not code
                 if((code>=65 && code<=90) || (code>=97 && code<=122)){
-                    newData.push(" ");
+                    newData.push(str[i]);
                 }
             }
         }
