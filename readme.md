@@ -22,3 +22,11 @@ So these are assignments for those week where we have to write programs other we
 - Javascript practise questions(Easy,medium,hard)
 - Asynchronous Javascript practise questions(Easy,medium,hard)
 ```
+
+#### Week-3
+
+```
+- Easy
+ ./BgColor
+ 
+```
