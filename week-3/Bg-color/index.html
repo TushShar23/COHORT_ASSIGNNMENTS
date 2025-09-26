@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bg-color-changer</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        /* body{
+            height: 100%;
+            width: 100vw;
+        } */
+        #main{
+            border: 2px solid gray;
+            height: 100vh;
+            width: 100vw;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .palette{
+            border: 2px solid black;
+            margin-bottom: 8rem;
+            display: flex;
+            flex-wrap:wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 7px;
+            width:auto;
+            height: auto;
+            cursor: pointer;
+
+        }
+        .colors{
+            border: 2px solid yellowgreen;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px 5px;
+            gap: 2.5rem;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .color-name{
+            height: auto;
+            width: auto;
+            border: 1px solid black;
+            padding: 5px 15px;
+            border-radius: 0.7rem;
+        }
+        #Red{
+            background-color: red;
+
+        }
+        #Yellow{
+            background-color: Yellow;
+        }
+        #Black{
+            background-color: Black;
+            color: white;
+        }
+        #Purple{
+            color: white;
+            background-color: Purple;
+        }
+        #default-case{
+            color: black;
+        }
+
+        .btn{
+            border-radius: 0.6rem;
+            border: 1px solid black;
+            color: white;
+            background-color: rgb(7, 37, 63);
+            padding: 7px 9px;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .inputs{
+            font-size: 17px;
+            height: auto;
+            width: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="palette">
+            <div class="colors">
+                <span class="color-name" id="Red">
+                    <p>Red</p>
+                </span>
+                <span class="color-name" id="Yellow">
+                    <p>Yellow</p>
+                </span>
+                <span class="color-name" id="Black">
+                    <p>Black</p>
+                </span>
+                <span class="color-name" id="Purple">
+                    <p>Purple</p>
+                </span>
+                <span class="color-name" id="default-case">
+                    <p>Default</p>
+                </span>
+            </div>
+            <br>
+            <div class="buttons">
+                <button class="btn">Add Color</button>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    const main = document.querySelector("#main");
+    const btn = document.querySelector(".btn");
+    const colordiv = document.querySelector(".colors")
+
+    const red = document.querySelector("#Red")
+    const yellow = document.querySelector("#Yellow")
+    const black = document.querySelector("#Black")
+    const purple = document.querySelector("#Purple")
+    const defcase = document.querySelector("#default-case")
+
+    red.addEventListener("click",()=>{
+        main.style.backgroundColor = "red";
+    })
+
+    black.addEventListener("click",()=>{
+        main.style.backgroundColor = "black";
+        black.style.border = "1px solid white";
+        defcase.style.color = "white"
+        defcase.style.border = "1px solid white"
+    })
+
+    yellow.addEventListener("click",()=>{
+        main.style.backgroundColor = "yellow";
+    })
+
+    purple.addEventListener("click",()=>{
+        main.style.backgroundColor = "purple";
+    })
+
+    defcase.addEventListener("click",()=>{
+        main.style.backgroundColor = "white";
+        defcase.style.color = "black"
+        defcase.style.border = "1px solid black"
+    })
+
+    btn.addEventListener('click',(e)=>{
+        // e.preventDefault()
+        const newInp = document.createElement('input');
+        newInp.type = "text"
+        newInp.id = "color-inputs"
+        newInp.classList.add("inputs","color-name")
+        colordiv.appendChild(newInp);
+
+        // you cannot retrieve a value from "input" till some action has been fire on that input.SEE when someone clicks on addcolor button then it create a new input you add it in DOM and user gives some input BUT we cannot fetch its value right after creating it coz it will give "EMPTY" to us.Thatswhy we put it in the addEventlistener() when someone press the enter key then its value will be fetched.Technically now it is present in DOM
+
+        const coloInp = document.createElement('span');
+        newInp.addEventListener("keypress",(e)=>{
+            if(e.key === "Enter"){
+                // coloInp.style.backgroundColor = coloInp.value
+                // colordiv.appendChild(coloInp)
+                // main.style.backgroundColor = coloInp.value;
+                const inputValue = document.getElementById("color-inputs").value
+                const para = document.createElement('p')
+                
+                coloInp.classList.add("color-name")
+                para.textContent = inputValue
+                coloInp.style.backgroundColor = inputValue;
+                coloInp.appendChild(para);
+
+                main.style.backgroundColor = inputValue
+        
+                colordiv.removeChild(newInp);
+                colordiv.appendChild(coloInp);
+            
+            }
+
+        })
+        
+        coloInp.addEventListener("click",()=>{
+            main.style.backgroundColor = coloInp.innerText
+            // innertext woh return karta hai ya show karta hai WHICH WE NEED TO SHOW ON THE SCREEN.
+            
+            //textContent sab kuch including hidden text ke saath show karta hai.
+        })
+        
+        
+
+        // coloInp.addEventListener('')
+
+    })
+
+    
+
+</script>
+</html>
