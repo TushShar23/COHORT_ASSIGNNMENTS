@@ -28,5 +28,6 @@ So these are assignments for those week where we have to write programs other we
 ```
 - Easy
  ./BgColor
+ ./Quiz app
  
 ```
