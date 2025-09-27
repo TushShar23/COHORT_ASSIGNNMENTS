@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            border: 4px solid black;
+            width: auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(#e66465, #9198e5);
+        }
+        .container{
+            width: 700px;
+            height: 500px;
+            border: 2px solid rgb(22, 23, 21);
+            border-radius: 1rem;
+            padding: 10px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .question{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 35px;
+            /* border: 2px solid yellow; */
+            padding: 5px 5px ;
+        }
+        .answers{
+            font-size: 25px;
+            display: flex;
+            flex-direction: column;
+            gap:0.8rem;
+            /* padding: 10px 10px; */
+        }
+        .opts{
+            padding: 5px 15px;
+            /* border: 2px solid rebeccapurple; */
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .btn{
+            width: 90px;
+            height: 40px;
+            font-size: 17px;
+            font-weight: 600;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 1rem;
+
+        }
+        .btn:hover{
+            color:black;
+            background-color: white;
+        }
+        .result{
+            width: 400px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+            border-radius: 1rem;
+        }
+
+        .radioClass{
+            width: 40px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <h2 class="question"></h2>
+            <div class="answers">
+
+            </div>
+
+            <button class="btn" id="next">Next</button>
+
+        </div>
+        <div class="result">
+
+        </div>
+    </div>
+</body>
+<script type="module">
+    import { quizData } from './data.js'
+    const dataArr = Array.from(quizData)
+
+    let tog=1;
+    const maindiv = document.querySelector(".container");
+    const nextbtn = document.querySelector('#next')
+    const quesbox = document.querySelector('.question')
+    const ansbox = document.querySelector('.answers')
+    const maincontainer = document.querySelector('.main')
+    const resultbox = document.querySelector('.result')
+
+
+    const option1 = document.createElement('div')
+    option1.classList.add("opts")
+    const option2 = document.createElement('div')
+    option2.classList.add("opts")
+    const option3 = document.createElement('div')
+    option3.classList.add("opts")
+    const option4 = document.createElement('div')
+    option4.classList.add("opts")
+
+    const radio1 = document.createElement('input')
+    radio1.type="radio"
+    radio1.name="answer"
+    radio1.classList.add("radioClass")
+    
+
+    const radio2 = document.createElement('input')
+    radio2.type="radio"
+    radio2.name="answer"
+    radio2.classList.add("radioClass")
+
+
+    const radio3 = document.createElement('input')
+    radio3.type="radio"
+    radio3.name="answer"
+    radio3.classList.add("radioClass")
+    
+
+    const radio4 = document.createElement('input')
+    radio4.type="radio"
+    radio4.name="answer"
+    radio4.classList.add("radioClass")
+    
+
+    let counter=0;
+
+// so now there is no repetition of code 
+    function Loadcontent(index){
+
+        option1.textContent=""
+        option2.textContent=""
+        option3.textContent=""
+        option4.textContent=""
+
+        quesbox.textContent = quizData[index]["question"]
+
+
+        const label1= document.createElement('label')
+        label1.textContent = quizData[index]["a"]
+        radio1.checked=false
+        option1.appendChild(radio1)
+        option1.appendChild(label1)
+
+        const label2= document.createElement('label')
+        label2.textContent = quizData[index]["b"]
+        radio2.checked=false
+        option2.appendChild(radio2)
+        option2.appendChild(label2)
+
+        const label3= document.createElement('label')
+        label3.textContent = quizData[index]["c"]
+        radio3.checked=false
+        option3.appendChild(radio3)
+        option3.appendChild(label3)
+
+        const label4= document.createElement('label')
+        label4.textContent = quizData[index]["d"]
+        radio4.checked=false
+        option4.appendChild(radio4)
+        option4.appendChild(label4)
+
+
+        ansbox.appendChild(option1)
+        ansbox.appendChild(option2)
+        ansbox.appendChild(option3)
+        ansbox.appendChild(option4)
+
+    }
+
+    // this will show only first question then user clicks on next btn then it will start showing next and then next.
+    Loadcontent(0)
+
+    let ans=0
+    nextbtn.addEventListener("click",(e)=>{
+        // const radioSelected = document.querySelector("input[name='answer']:checked")
+        // this line tells fetch the element from radioinputs which is checked and who name is answer
+        // console.log(radioSelected.nextSibling.textContent)
+        // this is the way to display the textcontent.NextSibling of radio is label whose textcontent is quizdata
+
+
+        const radioSelected = document.querySelector("input[name='answer']:checked");
+        const selectoption = quizData[counter]["correct"]
+        console.log(selectoption)
+        console.log(quizData[counter][selectoption]);
+        if(radioSelected.nextSibling.textContent === quizData[counter][selectoption]){
+            ans++;
+        }
+e
+        counter++;
+        if(counter < dataArr.length){
+            Loadcontent(counter)
+            
+        }
+        else{
+            maindiv.textContent=""
+            maindiv.textContent = "QUIZ OVER"
+            maindiv.style.width = "auto"
+            maindiv.style.height = "auto"
+            maindiv.style.textAlign = "center"
+            maindiv.style.border = "none"
+            maindiv.style.fontSize = "40px"
+            resultbox.style.border="3px solid rgb(240, 232, 232)"
+            resultbox.innerHTML= `<span>Result : ${ans}/5</span>`
+
+            // newEle.appendChild(maindiv)
+            // newEle.appendChild(resultbox)
+            // maincontainer.appendChild(newEle)
+        }
+
+        
+    })
+    console.log(quizData)
+</script>
+</html>
