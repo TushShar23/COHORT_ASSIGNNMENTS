@@ -29,5 +29,6 @@ So these are assignments for those week where we have to write programs other we
 - Easy
  ./BgColor (HTML,CSS,JAVASCRIPT)
  ./Quiz app (HTML,CSS,JAVASCRIPT)
+ ./Pokemon (HTML,CSS,JAVASCRIPT,API)
  
 ```
