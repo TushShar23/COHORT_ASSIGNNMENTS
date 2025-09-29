@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragAndDrop</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            justify-content: space-between;
+            margin: 10px 100px;
+            align-items: center;
+        }
+        .dragbox{
+            border: 2px solid yellow;
+            height: auto;
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 10px 10px;
+        }
+        .box{
+            height: 100px;
+            width: 80px;
+            border-radius: 1rem;
+            border: 2px solid black;
+            text-align: center;
+        }
+        .dropbox{
+            border: 2px solid green;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 10px;
+            gap: 0.5rem;
+            height: 600px;
+            width: 500px;
+        }
+
+        #b1{
+            background-color: antiquewhite;
+        }
+        #b2{
+            background-color: blue;
+        }
+        #b3{
+            background-color: black;
+            color: white;
+        }
+        #b4{
+            background-color: brown;
+        }
+        #b5{
+            background-color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="dragbox" draggable="true">
+        <div class="box" id="b1" draggable="true">1</div>
+        <div class="box" id="b2" draggable="true">2</div>
+        <div class="box" id="b3" draggable="true">3</div>
+        <div class="box" id="b4" draggable="true">4</div>
+        <div class="box" id="b5" draggable="true">5</div>
+    </div>
+
+    <div class="dropbox" id="mydropbox" draggable="true">
+
+    </div>
+</body>
+<script>
+    let selected = null;
+    const listItems = document.getElementsByClassName('box')
+    const Target = document.getElementById('mydropbox')
+    const dragbox = document.querySelector(".dragbox")
+
+    for(list of listItems){
+        list.addEventListener("dragstart",(e)=>{
+            selected = e.target
+
+            Target.addEventListener("dragover",(e)=>{
+                e.preventDefault()
+            })
+
+            Target.addEventListener("drop",(e)=>{
+                // listItems.parentNode.removeChild(selected)
+                Target.appendChild(selected)
+                selected = null
+            })
+
+
+            dragbox.addEventListener("dragover",(e)=>{
+                e.preventDefault()
+            })
+
+            dragbox.addEventListener("drop",(e)=>{
+                dragbox.appendChild(selected);
+                selected = null;
+            })
+
+
+        })
+    }
+
+    // source.addEventListener('dragstart',(e)=>{
+    //     e.preventDefault()
+    //     selected = event.target
+    // })
+
+    // Target.addEventListener('dragover',(e)=>{
+    //     e.preventDefault()
+    //     // e.dataTransfer.dropEffect = "move"
+    // })
+
+    // Target.addEventListener("drop",(e)=>{
+    //     e.preventDefault()
+    //     if(event.target.className === "dropbox"){
+    //         dragged.parentNode.removeChild(dragged)
+    //         event.parentNode.appendChild(dragged)
+    //     }
+    // })
+
+</script>
+</html>
