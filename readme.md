@@ -30,5 +30,12 @@ So these are assignments for those week where we have to write programs other we
  ./BgColor (HTML,CSS,JAVASCRIPT)
  ./Quiz app (HTML,CSS,JAVASCRIPT)
  ./Pokemon (HTML,CSS,JAVASCRIPT,API)
+
+- Hard
+ ./Taskify(HTML,CSS,JAVASCRIPT,DRAG AND DROP)
  
 ```
+
+#### Week-4
+
+./middleware(01-reqCount),.js
