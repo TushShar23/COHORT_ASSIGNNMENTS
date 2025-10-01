@@ -1,76 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DragAndDrop</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- todo -->
-    <div class="category" id="mydragbox" draggable="true">
-        <div class="box" id="b1" draggable="true">1</div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="heading"><span class="main-name">Taskify</span> : tasks management tool</h1>
+    <div class="main">
+      <div class="category" id="mydragbox" draggable="true">
+      <div class="head"><h1 class="main-head">TODO</h1></div>
+      <!-- <div class="box" id="b1" draggable="true">1</div>
         <div class="box" id="b2" draggable="true">2</div>
         <div class="box" id="b3" draggable="true">3</div>
         <div class="box" id="b4" draggable="true">4</div>
-        <div class="box" id="b5" draggable="true">5</div>
-        <button class="btn">Add new</button>
-    </div>
+        <div class="box" id="b5" draggable="true">5</div>  -->
+      <button class="btn" id="TodoBtn">+ Add new</button>
+      </div>
 
     <!-- in progress -->
-    <div class="category" id="mydropbox" draggable="true">
-        <button class="btn">Add new</button>
-    </div>
+      <div class="category" id="myprogressbox" draggable="true">
+        <div class="head"><h1 class="main-head">In Progress</h1></div>
+        <button class="btn" id="ProgressBtn">+ Add new</button>
+      </div>
 
     <!-- under review -->
-    <div class="category" id="myURbox" draggable="true">
-        <button class="btn">Add new</button>
-    </div>
+      <div class="category" id="myURbox" draggable="true">
+        <div class="head"><h1 class="main-head">Under Review</h1></div>
+        <button class="btn" id="URbtn">+ Add new</button>
+      </div>
 
     <!-- finished -->
-    <div class="category" id="myfinishedBox" draggable="true">
-        <button class="btn">Add new</button>
+      <div class="category" id="myfinishedBox" draggable="true">
+        <div class="head"><h1 class="main-head">Finish</h1></div>
+        <button class="btn" id="finishBtn">+ Add new</button>
+      </div>
     </div>
-</body>
-<script>
-    let selected = null;
-    const listItems = document.getElementsByClassName('box')
-    // this returns the array of items we have in the drop box
-    const Target = document.getElementById('mydropbox')
-    const URbox = document.getElementById('myURbox')
-    const finishBox = document.getElementById('myfinishedBox')
-    const dragbox = document.querySelector("#mydragbox")
-
-    for(list of listItems){
-        list.addEventListener("dragstart",(e)=>{
-            selected = e.target
-
-            Target.addEventListener("dragover",(e)=>{
-                e.preventDefault()
-            })
-
-            Target.addEventListener("drop",(e)=>{
-                // listItems.parentNode.removeChild(selected)
-                Target.appendChild(selected)
-                selected = null
-            })
-
-
-            dragbox.addEventListener("dragover",(e)=>{
-                e.preventDefault()
-            })
-
-            dragbox.addEventListener("drop",(e)=>{
-                dragbox.appendChild(selected);
-                selected = null;
-            })
-
-
-        })
-    }
-
-    // every category box should have btn=addnew and draganddrop functionality
-    // USE IDS WHEN USING DRAG AND DROP INSTEAD OF CLASSES.
-
-</script>
+    <!-- todo -->
+    
+  </body>
+  <script src="index.js"></script>
 </html>
