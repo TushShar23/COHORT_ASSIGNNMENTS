@@ -14,17 +14,16 @@ app.use(express.json());
 // app.get("/healthy", (req, res)=> res.send("I am Healthy"));
 
 //  start writing your routes here
-app.use("/api/v1/user",userRoutes)
-app.use("/api/v1/todo",todoRoutes)
+app.use("/api/v1/user",userRoutes);
+app.use("/api/v1/todo",todoRoutes);
 
 
-async function main(){
+(async()=>{
     await mongoose.connect(`${process.env.MONGO_URL}/${process.env._DB}`) // Here i have used environment variables.
     app.listen(port,()=>{
         console.log("Server Started")
     })
+}) ();
 
-}
 
-main()
-
+// **************** for using IIFE as you starter function you have to put semicolons after every statement before IIFE else it will throw error ****************
