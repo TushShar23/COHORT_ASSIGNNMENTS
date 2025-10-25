@@ -31,16 +31,27 @@ router.post('/create', async(req, res) => {
 });
 
 router.put('/update', adminMiddleware, async(req, res) => {
-    // Implement update todo  logic
-    const newTitle = req.body.newTitle;
-    const newdoneStatus = req.body.newdoneStatus;
+    // Implement update todo logic
+    const userID = req.userId; // already populated in req object
+    const title = req.body.title;
+    const done = req.body.done;
+    const TodoId = req.body.TodoId;
 
-    const todoUpdate = await Todo.updateOne({userId: req.userId},
-    {   title: newTitle,
-        done:newdoneStatus
+    console.log(TodoId)
+
+    const todoUpdate = await Todo.findByIdAndUpdate(
+    {      
+        _id: TodoId,
+        userId: userID
+
+    },
+    {   title: title,
+        done: done 
     })
+    console.log(req.userId)
+    console.log(todoUpdate)
 
-    if(todoUpdate.matchedCount){
+    if(todoUpdate){
         res.json({
             message:"Todo updated Successfully!"
         })
@@ -61,6 +72,7 @@ router.delete('/delete', adminMiddleware, async(req, res) => {
 router.delete('/:id', adminMiddleware, async(req, res) => {
     // Implement delete todo by id logic
     const id = req.params.id;
+    // specified parameter and variable in which we are catching should be same.
     console.log(id,typeof(id))
     const delRec = await Todo.deleteOne({
         _id : id
@@ -77,7 +89,7 @@ router.delete('/:id', adminMiddleware, async(req, res) => {
         })
     }
 
-    console.log(delRec)
+    // console.log(delRec)
 
     
 });
@@ -95,6 +107,7 @@ router.get('/todos', async(req, res) => {
 router.get('/:id', async(req, res) => {
     // Implement fetching todo by id logic
     const id = req.params.id;
+    // specified parameter and variable in which we are catching should be same.
 
     const todo = await Todo.findOne({
         _id : id
